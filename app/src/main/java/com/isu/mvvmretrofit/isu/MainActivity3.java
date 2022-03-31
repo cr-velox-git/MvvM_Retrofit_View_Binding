@@ -1,5 +1,6 @@
 package com.isu.mvvmretrofit.isu;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -22,7 +23,6 @@ public class MainActivity3 extends AppCompatActivity {
         binding.setDataResponseViewModel(appViewModel3);
         binding.executePendingBindings();
 
-
         DataRequestApi dataRequestApi = new DataRequestApi();
         dataRequestApi.setDeviceId("21978777");
         dataRequestApi.setUserName("demoisu");
@@ -35,10 +35,17 @@ public class MainActivity3 extends AppCompatActivity {
         dataRequestApi.setBeneName("demoisu BBSR");
 
         appViewModel3.getResponse(dataRequestApi).observe(this, new Observer<DataResponse>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onChanged(DataResponse dataResponse) {
                 Toast.makeText(MainActivity3.this, dataResponse.getMessage(), Toast.LENGTH_SHORT).show();
-           binding.textview.setText(dataResponse.getData().getStatusDesc());
+                binding.textview.setText(
+                        "Status: " + dataResponse.getStatus().toString() + "\n" +
+                                "Message: " + dataResponse.getMessage() + "\n" +
+                                "data status: " + dataResponse.getData().getStatus().toString() + "\n" +
+                                "data sub_status: " + dataResponse.getData().getSubStatus() + "\n" +
+                                "data status_desc: " + dataResponse.getData().getStatusDesc()
+                );
             }
         });
     }
