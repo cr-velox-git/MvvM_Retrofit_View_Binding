@@ -23,6 +23,8 @@ public class MainActivity3 extends AppCompatActivity {
         binding.setDataResponseViewModel(appViewModel3);
         binding.executePendingBindings();
 
+        binding.textview.setText("Loading...");
+
         DataRequestApi dataRequestApi = new DataRequestApi();
         dataRequestApi.setDeviceId("21978777");
         dataRequestApi.setUserName("demoisu");
@@ -38,7 +40,6 @@ public class MainActivity3 extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onChanged(DataResponse dataResponse) {
-                Toast.makeText(MainActivity3.this, dataResponse.getMessage(), Toast.LENGTH_SHORT).show();
                 binding.textview.setText(
                         "Status: " + dataResponse.getStatus().toString() + "\n" +
                                 "Message: " + dataResponse.getMessage() + "\n" +
