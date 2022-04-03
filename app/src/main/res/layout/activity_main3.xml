@@ -3,11 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".isu.MainActivity3">
+
     <data>
+
         <variable
-            name="dataResponseViewModel"
+            name="viewModel"
             type="com.isu.mvvmretrofit.isu.AppViewModel3" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

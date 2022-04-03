@@ -2,7 +2,6 @@ package com.isu.mvvmretrofit.isu;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -16,11 +15,14 @@ public class MainActivity3 extends AppCompatActivity {
 
     ActivityMain3Binding binding;
     AppViewModel3 appViewModel3 = new AppViewModel3();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main3);
-        binding.setDataResponseViewModel(appViewModel3);
+        binding.setViewModel(appViewModel3);
+        binding.setLifecycleOwner(this);
         binding.executePendingBindings();
 
         binding.textview.setText("Loading...");
@@ -36,7 +38,7 @@ public class MainActivity3 extends AppCompatActivity {
         dataRequestApi.setEmail("demoisu123@gmail.com");
         dataRequestApi.setBeneName("demoisu BBSR");
 
-        appViewModel3.getResponse(dataRequestApi).observe(this, new Observer<DataResponse>() {
+        appViewModel3.mutableLiveData.observe(this, new Observer<DataResponse>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onChanged(DataResponse dataResponse) {
@@ -49,5 +51,7 @@ public class MainActivity3 extends AppCompatActivity {
                 );
             }
         });
+
+        appViewModel3.getResponse(dataRequestApi);
     }
 }
