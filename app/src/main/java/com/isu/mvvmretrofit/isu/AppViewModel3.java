@@ -11,15 +11,17 @@ public class AppViewModel3 extends ViewModel {
 
     private Repo3 repo;
 
-    MutableLiveData<DataResponse> mutableLiveData;
+    public MutableLiveData<DataResponse> mutableLiveData = new MutableLiveData<DataResponse>();
 
     public AppViewModel3() {
         repo = new Repo3();
     }
 
-    public void getResponse(DataRequestApi dataRequestApi) {
+    public DataRequestApi inputData = new DataRequestApi();
 
-        repo.requestData(dataRequestApi, new Callback<DataResponse>() {
+    public void getResponse() {
+
+        repo.requestData(inputData, new Callback<DataResponse>() {
             @Override
             public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {
                 DataResponse responseData = response.body();
